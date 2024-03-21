@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer utilities {
+
+  .clip-path-polygon {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .text-full {
+    font-size: 15rem;
+  }
+
+  .text-mid {
+    font-size: 3rem;
+  }
+
+  .min-h-1-2 {
+    min-height: 50%;
+  }
+
+  .logo:hover span {
+    max-width: 100%;
+  }
+
+}
