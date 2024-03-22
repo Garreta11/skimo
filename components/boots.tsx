@@ -8,7 +8,7 @@ import * as THREE from 'three'
 
 export default function BootsWrapper() {
 
-  const meshesRef = useRef()
+  const meshesRef = useRef<any[]>([]);
 
   const { menu } = useThemeContext();
   const [width, setWidth] = useState('w-full')
@@ -36,6 +36,7 @@ export default function BootsWrapper() {
 
   useEffect(() => {
     let items = [...document.querySelectorAll(".item")]
+    // let items = Array.from(document.querySelectorAll(".item"));
     items.forEach((im, i) => {
       if (im.alt == selectedItem) {
         // opacity
