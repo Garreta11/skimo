@@ -35,8 +35,8 @@ export default function BootsWrapper() {
   }, [])
 
   useEffect(() => {
-    let items = [...document.querySelectorAll(".item")]
-    // let items = Array.from(document.querySelectorAll(".item"));
+    // let items = [...document.querySelectorAll(".item")]
+    let items = Array.from(document.querySelectorAll(".item")) as HTMLImageElement[];
     items.forEach((im, i) => {
       if (im.alt == selectedItem) {
         // opacity

@@ -131,7 +131,8 @@ export default function GalleryWrapper() {
 
     raf()
 
-    let navs = [...document.querySelectorAll(".item")]
+    // let navs = [...document.querySelectorAll(".item")]
+    let navs = Array.from(document.querySelectorAll(".item")) as HTMLElement[];
     let nav = document.querySelector(".nav")
 
     let rots = sketch.groups.map(e=>e.rotation)
@@ -158,9 +159,11 @@ export default function GalleryWrapper() {
     })
     navs.forEach(el => {
       el.addEventListener('mouseover', (e) => {
-        attractTo = Number(e.target.getAttribute('data-nav'))
+        // attractTo = Number(e.target.getAttribute('data-nav'))
+        attractTo = Number((e.target as HTMLElement).getAttribute('data-nav'));
         navs.forEach(n => {
-          if (n.getAttribute('data-nav') == attractTo) {
+          //if (n.getAttribute('data-nav') == attractTo) {
+          if (n.getAttribute('data-nav') === String(attractTo)) {
             n.classList.add('opacity-100')
             n.classList.remove('opacity-10')
           } else {

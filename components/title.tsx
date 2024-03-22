@@ -10,7 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Title({ children }: { children: React.ReactNode }) {
 
-  const textRef = useRef()
+  // const textRef = useRef()
+  const textRef = useRef<HTMLElement>(null);
   const characters = useRef([])
 
   useLayoutEffect(() => {
@@ -45,7 +46,7 @@ export default function Title({ children }: { children: React.ReactNode }) {
           end: "bottom 90%",
           scrub: true,
           markers: false
-        }
+        } as any
       })
 
       const tops = [1080, 1000, 1200, 900, 1000]
@@ -68,7 +69,7 @@ export default function Title({ children }: { children: React.ReactNode }) {
   return (
     <section ref={textRef} className="w-full h-screen bg-white relative">
       <h1 className={`text-intro font-panchang text-full font-bold relative z-10 text-white mix-blend-difference left-1/2 transform top-56 -translate-x-1/2 w-fit`}>{
-        children.split("").map((letter: string, i: number) => {
+        String(children).split("").map((letter: string, i: number) => {
           return <span key={i} className='char opacity-0 relative transition-top' ref={ref => characters.current[i] = ref}>{letter}</span>
         })
       }</h1>
