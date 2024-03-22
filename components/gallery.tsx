@@ -191,7 +191,7 @@ export default function GalleryWrapper() {
         {images.map((im, i) => {
           return(
             <div key={i} className="n absolute w-2/3 h-2 bg-black">
-              <Image className="gallery-images" src={`/images/gallery/${im.name}`} alt={i} width={800} height={800/1.5}/>
+              <Image className="gallery-images" src={`/images/gallery/${im.name}`} alt={String(i)} width={800} height={800/1.5}/>
             </div>
           )
         })}
