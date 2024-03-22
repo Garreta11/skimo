@@ -12,7 +12,8 @@ export default function Title({ children }: { children: React.ReactNode }) {
 
   // const textRef = useRef()
   const textRef = useRef<HTMLElement>(null);
-  const characters = useRef([])
+  // const characters = useRef([])
+  const characters = useRef<Array<HTMLSpanElement | null>>([]);
 
   useLayoutEffect(() => {
     const context = gsap.context(() => {

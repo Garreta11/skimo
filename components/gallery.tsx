@@ -8,7 +8,8 @@ import gsap from 'gsap'
 
 export default function GalleryWrapper() {
 
-  const sketchRef = useRef()
+  // const sketchRef = useRef()
+  const sketchRef = useRef<Sketch | undefined>(undefined);
   const { menu } = useThemeContext();
   const [width, setWidth] = useState('w-full')
 
