@@ -66,7 +66,7 @@ export default function BootsWrapper() {
     setSettings(true)
   } 
 
-  function hexToRgb(hex) {
+  function hexToRgb(hex:any) {
     // Remove the '#' character if present
     hex = hex.replace('#', '');
 
@@ -81,7 +81,7 @@ export default function BootsWrapper() {
   const handleColor = (e:any) => {
     let decimalColor = hexToRgb(e.target.value);
 
-    meshesRef.current.forEach((mesh, i) => {
+    meshesRef.current.forEach((mesh) => {
       if (selectedItem === 'plastic_1') {
         if(mesh.name === 'plastic_right_1' || mesh.name === 'plastic_left_1') {
           mesh.material.color = new THREE.Color(decimalColor)

@@ -17,7 +17,7 @@ export default class Sketch {
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.setSize(this.width, this.height)
     this.renderer.setClearColor(0xeeeeee, 1)
-    this.renderer.outputEncoding = THREE.sRGBEncoding
+    // this.renderer.outputEncoding = THREE.sRGBEncoding
 
     this.container.appendChild(this.renderer.domElement)
 
