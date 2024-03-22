@@ -1,10 +1,10 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-import Scene from "@/components/scene"
+/* import Scene from "@/components/scene"
 import Section from "@/components/section"
 import Spacer from "@/components/spacer"
-import Title from "@/components/title"
+import Title from "@/components/title" */
 
 import { useThemeContext } from '@/components/theme'
 
