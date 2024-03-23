@@ -118,7 +118,7 @@ export default function HomeWrapper() {
         <Section side='right'>
           <div className="w-1/2 p-8">
             <h2 className="text-3xl font-bold">Descend with Purpose</h2>
-            <p className="text-1xl">With the summit conquered, it's time to reap the rewards of your ascent with a thrilling descent through untouched powder fields and glades. As you carve your way down the mountain, each turn is a testament to your skill and determination, offering a pure and exhilarating skiing experience away from the crowds.</p>
+            <p className="text-1xl">With the summit conquered, it is time to reap the rewards of your ascent with a thrilling descent through untouched powder fields and glades. As you carve your way down the mountain, each turn is a testament to your skill and determination, offering a pure and exhilarating skiing experience away from the crowds.</p>
           </div>
           <div className="w-1/2">
             <video className="w-full h-auto" width="1920" height="1080" controls={false} muted autoPlay loop>
@@ -132,7 +132,7 @@ export default function HomeWrapper() {
         <Section>
           <div className="w-1/2 p-8">
             <h2 className="text-3xl font-bold">Après Randonnée Revelry</h2>
-            <p className="text-1xl">After a day of exploration and adventure in the backcountry, unwind and celebrate your accomplishments with fellow adventurers. Whether it's sharing stories over a hearty meal at a backcountry hut or toasting to your achievements with a warm beverage by a crackling fire, the camaraderie of the après-randonnée experience is a cherished part of backcountry skiing culture.</p>
+            <p className="text-1xl">After a day of exploration and adventure in the backcountry, unwind and celebrate your accomplishments with fellow adventurers. Whether it is sharing stories over a hearty meal at a backcountry hut or toasting to your achievements with a warm beverage by a crackling fire, the camaraderie of the après-randonnée experience is a cherished part of backcountry skiing culture.</p>
           </div>
           <div className="w-1/2">
             <Image className="w-full h-auto" width={1536} height={896} src='/images/horizontal.JPG' alt="up" />
