@@ -16,7 +16,7 @@ export default class Sketch {
     })
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.setSize(this.width, this.height)
-    this.renderer.setClearColor(0xeeeeee, 1)
+    this.renderer.setClearColor(0x080808, 1)
     // this.renderer.outputEncoding = THREE.sRGBEncoding
 
     this.container.appendChild(this.renderer.domElement)
@@ -88,17 +88,15 @@ export default class Sketch {
       this.groups.push(group)
       this.scene.add(group)
       this.meshes.push(mesh)
+
       // mesh.position.y = i * 1.2
-      mesh.position.x = i * 20
+      // mesh.position.x = i * 20
 
-      group.position.y = -3
+      // group.position.y = -3
+      group.position.x = 20
+      group.position.y = 5
 
-      group.rotation.x = -0.5
-      group.rotation.y = -0.5
-      group.rotation.z = -0.5
-      /* group.rotation.x = -0.3
-      group.rotation.y = -0.3
-      group.rotation.z = -0.1 */
+      group.rotation.z = Math.PI
     })
   }
 

@@ -44,8 +44,8 @@ export default class Sketch {
 
     this.isPlaying = true
 
-    this.model
     this.meshes = []
+    this.model
     this.mixer
 
     this.sources = [
@@ -131,7 +131,6 @@ export default class Sketch {
       side: THREE.DoubleSide,
       uniforms: {
         time: { type: 'f', value: 0 },
-        distanceFromCenter: { type: 'f', value: 0 },
         texture1: { type: 't', value: null },
         resolution: { type: 'v4', value: new THREE.Vector4() },
         uvRate1: {
@@ -147,6 +146,7 @@ export default class Sketch {
     this.resources = new Resources(this.sources)
 
     this.resources.on('ready', () => {
+      this.model = this.resources.items.lady
       this.resources.items.lady.rotation.x = 0.15 * Math.PI
       this.resources.items.lady.traverse(child => {
         if (child.isMesh) {
@@ -174,6 +174,15 @@ export default class Sketch {
       })
       this.scene.add(this.resources.items.lady)
 
+      this.resources.items.lady.scale.setScalar(0)
+      gsap.to(this.resources.items.lady.scale, {
+        x: 1,
+        y: 1,
+        z: 1,
+        duration: 2,
+        delay: 2.5
+      })
+
       this.mixer = new THREE.AnimationMixer(this.resources.items.lady)
       const action = this.mixer.clipAction(
         this.resources.items.lady.animations[0]
@@ -188,7 +197,6 @@ export default class Sketch {
         scrub: true,
         markers: false,
         onUpdate: self => {
-          console.log(self.progress)
           const time = duration * self.progress * 2
           this.mixer.setTime(time)
 
@@ -198,6 +206,7 @@ export default class Sketch {
         }
       })
 
+      this.mixer.setTime(0)
       action.play()
     })
   }

@@ -227,25 +227,25 @@ export default function BootsWrapper() {
         <h2 className="text-2xl mb-4">CoNFIGURAToR</h2>
         <div className="mb-2.5">
           <h2 className="font-panchang font-bold text-black">Color</h2>
-          <input className="relative" type="color" onChange={handleColor} />
+          <input className="accent-black" type="color" onChange={handleColor} />
         </div>
 
         <div className="mb-2.5">
           <h2 className="font-panchang font-bold text-black">Roughness</h2>
-          <input type="range" onChange={handleRoughness} />
+          <input className="accent-black" type="range" onChange={handleRoughness} />
         </div>
         
         <div className="mb-2.5">
           <h2 className="font-panchang font-bold text-black">Metalness</h2>
-          <input type="range" onChange={handleMetalness} />
+          <input className="accent-black" type="range" onChange={handleMetalness} />
         </div>
 
         <div className="flex flex-wrap justify-end gap-2.5">
-          <div className="w-16 h-16 border-black border-2 cursor-pointer grayscale hover:grayscale-0 transition-all" onClick={handleTexture}/>
-          <img className="w-16 h-16 cursor-pointer grayscale hover:grayscale-0 transition-all" src='./images/boot/textures/lines.jpg' onClick={handleTexture}/>
-          <img className="w-16 h-16 cursor-pointer grayscale hover:grayscale-0 transition-all" src='./images/boot/textures/denim.jpg' onClick={handleTexture}/>
-          <img className="w-16 h-16 cursor-pointer grayscale hover:grayscale-0 transition-all" src='./images/boot/textures/leather.png' onClick={handleTexture}/>
-          <img className="w-16 h-16 cursor-pointer grayscale hover:grayscale-0 transition-all" src='./images/boot/textures/pattern.png' onClick={handleTexture}/>
+          <div className="w-16 h-16 border-black border-2 cursor-pointer" onClick={handleTexture}/>
+          <img className="w-16 h-16 cursor-pointer " src='./images/boot/textures/lines.jpg' onClick={handleTexture}/>
+          <img className="w-16 h-16 cursor-pointer " src='./images/boot/textures/denim.jpg' onClick={handleTexture}/>
+          <img className="w-16 h-16 cursor-pointer " src='./images/boot/textures/leather.png' onClick={handleTexture}/>
+          <img className="w-16 h-16 cursor-pointer " src='./images/boot/textures/pattern.png' onClick={handleTexture}/>
         </div>
 
         {textureSize && (

@@ -161,6 +161,22 @@ export default class Sketch {
         }
       })
       this.scene.add(this.resources.items.boots)
+
+      this.resources.items.boots.scale.setScalar(0)
+      gsap.to(this.resources.items.boots.scale, {
+        x: 1,
+        y: 1,
+        z: 1,
+        duration: 2,
+        delay: 2
+      })
+      console.log(this.resources.items.boots.rotation)
+      gsap.to(this.resources.items.boots.rotation, {
+        z: -2.1 * Math.PI,
+        duration: 2,
+        delay: 2
+      })
+
       this.resources.items.boots.position.set(0, -10, 0)
     })
   }

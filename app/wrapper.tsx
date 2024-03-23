@@ -18,7 +18,7 @@ export default function Wrapper({ children }: { children: React.ReactNode }) {
 
 
   return (
-    <div className={`${width} transition-all`}>
+    <div className={`${width} duration-500 transition-all`}>
       {children}
     </div>
   )

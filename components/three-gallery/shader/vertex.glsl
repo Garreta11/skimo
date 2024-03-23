@@ -19,7 +19,7 @@ void main() {
   /* pos.y += sin(time * 0.3) * 0.02;
   vUv.y -= sin(time * 0.3) * 0.02; */
 
-  pos.x += 0.5 * distanceFromCenter;
+  pos.x -= 1.5 * distanceFromCenter;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
 }
