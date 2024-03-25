@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import Sketch from './three-boots/module'
 import { useThemeContext } from '@/components/theme'
 import * as THREE from 'three'
+import gsap from 'gsap'
 
 
 export default function BootsWrapper() {
@@ -32,6 +33,17 @@ export default function BootsWrapper() {
     })
 
     meshesRef.current = sketch.meshes
+
+    let items = Array.from(document.querySelectorAll(".item")) as HTMLImageElement[];
+
+    items.forEach((im, i) => {
+      gsap.to(im, {
+        opacity: 1,
+        left: 0,
+        delay: 1.5 + i * 0.3
+      })
+    })
+
   }, [])
 
   useEffect(() => {
@@ -211,14 +223,14 @@ export default function BootsWrapper() {
 
   return (
     <section className='relative'>
-      <div className="fixed rounded h-fit z-20 text-white top-1/2 left-0 p-8 transform -translate-y-1/2 flex flex-wrap flex-col justify-center font-panchang font-bold">
-        <img className="item w-20 h-20 transition-all cursor-pointer hover:w-40 hover:h-40" src="./images/boot/base.png" alt="base" onClick={() => handleItem('base')}/>
-        <img className="item w-20 h-20 transition-all cursor-pointer hover:w-40 hover:h-40" src="./images/boot/chrome.png" alt="chrome" onClick={() => handleItem('chrome')} />
-        <img className="item w-20 h-20 transition-all cursor-pointer hover:w-40 hover:h-40" src="./images/boot/cloth.png" alt="cloth" onClick={() => handleItem('cloth')} />
-        <img className="item w-20 h-20 transition-all cursor-pointer hover:w-40 hover:h-40" src="./images/boot/lace.png" alt="lace" onClick={() => handleItem('lace')} />
-        <img className="item w-20 h-20 transition-all cursor-pointer hover:w-40 hover:h-40" src="./images/boot/metal.png" alt="metal" onClick={() => handleItem('metal')} />
-        <img className="item w-20 h-20 transition-all cursor-pointer hover:w-40 hover:h-40" src="./images/boot/plastic_1.png" alt="plastic_1" onClick={() => handleItem('plastic_1')} />
-        <img className="item w-20 h-20 transition-all cursor-pointer hover:w-40 hover:h-40" src="./images/boot/plastic_2.png" alt="plastic_2" onClick={() => handleItem('plastic_2')} />
+      <div className="boots fixed rounded h-fit z-20 text-white top-1/2 left-0 p-8 transform -translate-y-1/2 flex flex-wrap flex-col justify-center font-panchang font-bold">
+        <img className="item w-20 h-20 cursor-pointer hover:w-40 hover:h-40 opacity-0 relative -left-4" src="./images/boot/base.png" alt="base" onClick={() => handleItem('base')}/>
+        <img className="item w-20 h-20 cursor-pointer hover:w-40 hover:h-40 opacity-0 relative -left-4" src="./images/boot/chrome.png" alt="chrome" onClick={() => handleItem('chrome')} />
+        <img className="item w-20 h-20 cursor-pointer hover:w-40 hover:h-40 opacity-0 relative -left-4" src="./images/boot/cloth.png" alt="cloth" onClick={() => handleItem('cloth')} />
+        <img className="item w-20 h-20 cursor-pointer hover:w-40 hover:h-40 opacity-0 relative -left-4" src="./images/boot/lace.png" alt="lace" onClick={() => handleItem('lace')} />
+        <img className="item w-20 h-20 cursor-pointer hover:w-40 hover:h-40 opacity-0 relative -left-4" src="./images/boot/metal.png" alt="metal" onClick={() => handleItem('metal')} />
+        <img className="item w-20 h-20 cursor-pointer hover:w-40 hover:h-40 opacity-0 relative -left-4" src="./images/boot/plastic_1.png" alt="plastic_1" onClick={() => handleItem('plastic_1')} />
+        <img className="item w-20 h-20 cursor-pointer hover:w-40 hover:h-40 opacity-0 relative -left-4" src="./images/boot/plastic_2.png" alt="plastic_2" onClick={() => handleItem('plastic_2')} />
       </div>
 
       <div className={`fixed flex flex-col justify-center w-1/4 font-panchang font-bold border-4 border-r-0 border-black backdrop-blur min-h-1-2 z-20 right-0 p-8 top-1/2 transform -translate-y-1/2 text-right text-black transition-all ${settings ? 'translate-x-0 opacity-1' : 'translate-x-1/2 opacity-0'}`}>

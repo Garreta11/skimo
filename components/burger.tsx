@@ -15,7 +15,7 @@ export default function Burger() {
   }
 
   return (
-    <div className={`fixed font-bold right-5 top-5 cursor-pointer z-20 text-white mix-blend-difference font-panchang`} onClick={handleMenu}>
+    <div className={`fixed font-bold right-5 top-5 cursor-pointer z-40 text-white mix-blend-difference font-panchang`} onClick={handleMenu}>
       <p>{menu ? "close" : "open"}</p>
     </div>
   )

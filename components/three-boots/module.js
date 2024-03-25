@@ -54,15 +54,25 @@ export default class Sketch {
         name: 'boots',
         type: 'fbxModel',
         path: './ski-boot/Ski_Boots_bw.fbx'
+      },
+      {
+        name: 'envmap',
+        type: 'envmap',
+        path: './envMap/snow.hdr'
       }
     ]
 
-    this.envMap()
-    this.addLights()
-    this.addObjects()
-    this.resize()
-    this.render()
-    this.setupResize()
+    this.resources = new Resources(this.sources)
+    this.resources.on('ready', () => {
+      console.log(this.resources)
+      this.envMap()
+      this.addLights()
+      this.addObjects()
+      this.resize()
+      this.render()
+      this.setupResize()
+    })
+
     // this.settings();
   }
 
@@ -101,14 +111,19 @@ export default class Sketch {
     this.scene.background = this.environmentMap
     this.scene.environment = this.environmentMap */
 
-    const rgbeloader = new RGBELoader()
+    /* const rgbeloader = new RGBELoader()
 
     rgbeloader.load('/envMap/snow.hdr', environmentMap => {
       environmentMap.mapping = THREE.EquirectangularReflectionMapping
       this.scene.background = environmentMap
       this.scene.backgroundIntensity = 0.1
       this.scene.environment = environmentMap
-    })
+    }) */
+
+    this.resources.items.envmap.mapping = THREE.EquirectangularReflectionMapping
+    this.scene.background = this.resources.items.envmap
+    this.scene.backgroundIntensity = 0.1
+    this.scene.environment = this.resources.items.envmap
   }
 
   addLights() {
@@ -144,41 +159,35 @@ export default class Sketch {
       fragmentShader: fragment
     })
 
-    this.resources = new Resources(this.sources)
-
-    this.resources.on('ready', () => {
-      this.resources.items.boots.traverse(child => {
-        if (child.isMesh) {
-          console.log(child.name)
-          child.material = new THREE.MeshStandardMaterial({
-            roughness: 0.3,
-            metalness: 1,
-            color: 0xaaaaaa
-          })
-          child.material.envMapIntensity = 3
-          child.material.depthWrite = true
-          this.meshes.push(child)
-        }
-      })
-      this.scene.add(this.resources.items.boots)
-
-      this.resources.items.boots.scale.setScalar(0)
-      gsap.to(this.resources.items.boots.scale, {
-        x: 1,
-        y: 1,
-        z: 1,
-        duration: 2,
-        delay: 2
-      })
-      console.log(this.resources.items.boots.rotation)
-      gsap.to(this.resources.items.boots.rotation, {
-        z: -2.1 * Math.PI,
-        duration: 2,
-        delay: 2
-      })
-
-      this.resources.items.boots.position.set(0, -10, 0)
+    this.resources.items.boots.traverse(child => {
+      if (child.isMesh) {
+        child.material = new THREE.MeshStandardMaterial({
+          roughness: 0.3,
+          metalness: 1,
+          color: 0xaaaaaa
+        })
+        child.material.envMapIntensity = 3
+        child.material.depthWrite = true
+        this.meshes.push(child)
+      }
     })
+    this.scene.add(this.resources.items.boots)
+
+    this.resources.items.boots.scale.setScalar(0)
+    gsap.to(this.resources.items.boots.scale, {
+      x: 1,
+      y: 1,
+      z: 1,
+      duration: 2,
+      delay: 1.5
+    })
+    gsap.to(this.resources.items.boots.rotation, {
+      z: -2.1 * Math.PI,
+      duration: 2,
+      delay: 1.5
+    })
+
+    this.resources.items.boots.position.set(0, -10, 0)
   }
 
   stop() {

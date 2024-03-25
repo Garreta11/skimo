@@ -55,29 +55,10 @@ export default function GalleryWrapper() {
       label: 'Petit Peric (2.690m)'
     },
     {
-      name: '8.jpg',
-      label: 'Petit Peric (2.690m)'
+      name: '9.jpg',
+      label: "Cambre d'Aze (2.740m)"
     },
-    {
-      name: '8.jpg',
-      label: 'Petit Peric (2.690m)'
-    },
-    {
-      name: '8.jpg',
-      label: 'Petit Peric (2.690m)'
-    },
-    {
-      name: '8.jpg',
-      label: 'Petit Peric (2.690m)'
-    },
-    {
-      name: '8.jpg',
-      label: 'Petit Peric (2.690m)'
-    },
-    {
-      name: '8.jpg',
-      label: 'Petit Peric (2.690m)'
-    }
+    
   ]
   useEffect(() => {
 
@@ -123,7 +104,7 @@ export default function GalleryWrapper() {
 
     function raf() {
       position += speed
-      speed *= 0.8
+      speed *= 0.9
 
       // Clamp position so we don't have infinite scroll
       // position = Math.min(Math.max(position, 0), 15)
@@ -144,7 +125,7 @@ export default function GalleryWrapper() {
         sketch.meshes[i].position.y = radius * Math.sin(angle)
         sketch.meshes[i].position.z = o.dist * 10.; */
 
-        // Horizontal Slider
+        // Vertical Slider
         sketch.meshes[i].position.y = (i * 4) - (position * 4)
         sketch.meshes[i].position.z = o.dist * 1.;
     
@@ -154,7 +135,7 @@ export default function GalleryWrapper() {
         
       })
 
-      position += -(position - attractTo) * 0.01
+      position += -(position - attractTo) * 0.1
 
       window.requestAnimationFrame(raf)
     }
@@ -220,10 +201,10 @@ export default function GalleryWrapper() {
 
   return (
     <section className='relative'>
-      <div className="animate-list font-panchang font-bold nav fixed z-30 h-1/2 left-8 top-1/2 transform -translate-y-1/2 text-white mix-blend-difference">
+      <div className="animate-list font-panchang font-bold nav fixed z-30 h-1/2 left-8 lg:top-1/2 top-16 transform lg:-translate-y-1/2 text-white mix-blend-difference">
         {images.map((im, i) => {
           return(
-            <div key={i} className={`item opacity-0 -translate-x-10 text-2xl my-2 ${i === 0 ? 'text-white' : 'text-gray-800'} `} data-nav={i}>{im.label}</div>
+            <div key={i} className={`item opacity-0 -translate-x-10 text-1xl lg:text-2xl my-2 ${i === 0 ? 'text-white' : 'text-gray-800'} `} data-nav={i}>{im.label}</div>
           )
         })}
       </div>

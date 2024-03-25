@@ -23,7 +23,7 @@ export default function Header() {
   }
 
   return (
-    <header className={`z-10 fixed right-0 flex justify-center items-center h-screen bg-black text-white font-bold ${width} transition-all duration-500 overflow-auto`}>
+    <header className={`z-30 fixed right-0 flex justify-center items-center h-screen bg-black text-white font-bold ${width} transition-all duration-500 overflow-auto`}>
       <nav className='py-8'>
         <ul className='font-panchang container flex flex-col gap-5 items-center	justify-center text-center text-2xl'>
           <li>

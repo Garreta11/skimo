@@ -2,6 +2,7 @@ import EventEmitter from './EventEmitter'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
 export default class Resources extends EventEmitter {
   constructor(sources) {
@@ -23,6 +24,7 @@ export default class Resources extends EventEmitter {
     this.loaders.fbxLoader = new FBXLoader()
     this.loaders.textureLoader = new THREE.TextureLoader()
     this.loaders.cubeTextureLoader = new THREE.CubeTextureLoader()
+    this.loaders.rgbeloader = new RGBELoader()
   }
 
   startLoading() {
@@ -41,6 +43,10 @@ export default class Resources extends EventEmitter {
         })
       } else if (source.type === 'cubeTexture') {
         this.loaders.cubeTextureLoader.load(source.path, file => {
+          this.sourceLoaded(source, file)
+        })
+      } else if (source.type === 'envmap') {
+        this.loaders.rgbeloader.load(source.path, file => {
           this.sourceLoaded(source, file)
         })
       }

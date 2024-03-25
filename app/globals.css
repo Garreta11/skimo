@@ -25,4 +25,16 @@
     max-width: 100%;
   }
 
+  .padding-parallax {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .padding-parallax-before {
+    content: "";
+    display: block;
+    width: 100%;
+    padding-bottom: 100%;
+  }
 }
