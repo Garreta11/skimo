@@ -81,23 +81,32 @@ export default function GalleryWrapper() {
       o.dist = Math.min(Math.abs(position - i), 1)
       o.dist = 1 - o.dist**2
 
-      let scale = 3 + 5 * o.dist
-      // let scale = 1
+      // let scale = 3 + 5 * o.dist
+      let scale = 3.5
       let radius = 10.
 
       sketch.meshes[i].position.set(0, 0, 0)
       sketch.meshes[i].rotation.set(0, 0, 0)
 
       // Horizontal Slider
-      gsap.to(sketch.meshes[i].position, {
+      /* gsap.to(sketch.meshes[i].position, {
         y: (i * 4) - (position * 4),
         duration: 1,
         delay: 1  
+      }) */
+
+      // Circle Slider
+      let pos = (position % objs.length)
+      let angle = ((i - pos) / objs.length) * Math.PI * 2;
+      gsap.to(sketch.meshes[i].position, {
+        x: radius * Math.cos(angle + Math.PI / 2),
+        y: radius * Math.sin(angle + Math.PI / 2),
+        duration: 1,
+        delay: 1
       })
 
      
       sketch.meshes[i].scale.set(scale, scale, scale)
-      sketch.meshes[i].rotation.z = Math.PI
       sketch.meshes[i].material.uniforms.distanceFromCenter.value = o.dist;
 
     })
@@ -107,7 +116,7 @@ export default function GalleryWrapper() {
       speed *= 0.9
 
       // Clamp position so we don't have infinite scroll
-      // position = Math.min(Math.max(position, 0), 15)
+      // position = Math.min(Math.max(position, 0), objs.length)
 
       let pos = (position % objs.length)
 
@@ -116,18 +125,19 @@ export default function GalleryWrapper() {
         o.dist = 1 - o.dist**2
 
         // let scale = 1 + 0.9 * o.dist
-        let scale = 3 + 8 * o.dist
+        //let scale = 3 + 8 * o.dist
+        let scale = 3.5
         let radius = 10.
 
         // Circle Shape
         let angle = ((i - pos) / objs.length) * Math.PI * 2;
-        /* sketch.meshes[i].position.x = radius * Math.cos(angle) + (10 * o.dist)
-        sketch.meshes[i].position.y = radius * Math.sin(angle)
-        sketch.meshes[i].position.z = o.dist * 10.; */
+        sketch.meshes[i].position.x = radius * Math.cos(angle + Math.PI / 2)
+        sketch.meshes[i].position.y = radius * Math.sin(angle + Math.PI / 2)
+        // sketch.meshes[i].position.z = o.dist * 10.;
 
         // Vertical Slider
-        sketch.meshes[i].position.y = (i * 4) - (position * 4)
-        sketch.meshes[i].position.z = o.dist * 1.;
+        /* sketch.meshes[i].position.y = (i * 4) - (position * 4)
+        sketch.meshes[i].position.z = o.dist * 1.; */
     
 
         sketch.meshes[i].scale.set(scale, scale, scale)
@@ -141,9 +151,9 @@ export default function GalleryWrapper() {
     }
 
     setTimeout(() => {
-      /* window.addEventListener('wheel', (e) => {
+      window.addEventListener('wheel', (e) => {
         speed += (e.deltaY * 0.0002)
-      }) */
+      })
       raf()
     }, 3000)
 

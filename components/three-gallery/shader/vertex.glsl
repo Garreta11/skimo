@@ -11,15 +11,13 @@ void main() {
 
   // bending image
   // pos.y += sin(PI * uv.x) * 0.03 * distanceFromCenter;
-  pos.x += sin(PI * uv.x * 3.0 + time) * 0.01 * (distanceFromCenter);
+  pos.x += sin(PI * uv.x * 3.0 + time) * 0.01;
   // pos.y += sin(PI * uv.y * 2.0 + time) * 0.2 * (distanceFromCenter);
-  pos.z += sin(PI * uv.y * 3.0 + time) * 0.01 * (distanceFromCenter);
+  pos.z += sin(PI * uv.y * 3.0 + time) * 0.01;
 
   // parallax
-  /* pos.y += sin(time * 0.3) * 0.02;
-  vUv.y -= sin(time * 0.3) * 0.02; */
-
-  pos.x -= 1.5 * distanceFromCenter;
+  pos.y += sin(time * 0.3) * 0.02;
+  vUv.y -= sin(time * 0.3) * 0.02;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
 }
