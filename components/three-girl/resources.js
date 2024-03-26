@@ -36,6 +36,7 @@ export default class Resources extends EventEmitter {
           this.sourceLoaded(source, model)
         })
       } else if (source.type === 'texture') {
+        console.log(source)
         this.loaders.textureLoader.load(source.file, file => {
           this.sourceLoaded(source, file)
         })

@@ -212,6 +212,12 @@ export default function HomeWrapper() {
             {/* <Image className="w-full h-auto" width={1536} height={896} src='/images/horizontal.JPG' alt="up" /> */}
           </div>
         </Section>
+        <div className="mountain">
+          <Spacer />
+          <Spacer />
+          <Spacer />
+        </div>
+
       </div>
       <Spacer />
 

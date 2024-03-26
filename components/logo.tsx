@@ -11,7 +11,7 @@ export default function Logo() {
 
   return (
     <Link href='/'>
-      <div className='fixed left-5 top-5 cursor-pointer z-20 scale-100 text-white mix-blend-difference'>
+      <div className='fixed left-5 top-5 cursor-pointer z-40 scale-100 text-white mix-blend-difference'>
         <p className='logo font-bold flex font-panchang text-5xl'>S<span className='max-w-0 inline-block overflow-hidden duration-500 transition-all'>KiMO</span></p>
       </div>
     </Link>

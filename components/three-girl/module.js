@@ -22,7 +22,7 @@ export default class Sketch {
     })
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.setSize(this.width, this.height)
-    this.renderer.setClearColor(0xffffff, 0)
+    this.renderer.setClearColor(0x3e75c7, 0)
     // this.renderer.outputEncoding = THREE.sRGBEncoding
 
     this.container.appendChild(this.renderer.domElement)
@@ -44,16 +44,31 @@ export default class Sketch {
 
     this.isPlaying = true
 
+    const color = 0xffffff // white
+    const near = 10
+    const far = 500
+    this.scene.fog = new THREE.Fog(color, near, far)
+
     this.meshes = []
     this.model
+    this.mountains
     this.mixer
 
     this.sources = [
       {
         name: 'lady',
         type: 'fbxModel',
-        // path: './skiing-lady/lady.fbx'
         path: './skiing-lady/source/ski24_sketchfab_003.fbx'
+      },
+      {
+        name: 'mountaintexture',
+        type: 'texture',
+        file: './images/mountain/texture2.jpeg'
+      },
+      {
+        name: 'mountainheight',
+        type: 'texture',
+        file: './images/mountain/height.png'
       }
     ]
 
@@ -64,6 +79,16 @@ export default class Sketch {
     this.render()
     this.setupResize()
     // this.settings();
+
+    window.addEventListener('mousemove', e => {
+      this.mouse.x = e.clientX
+      this.mouse.y = e.clientY
+    })
+  }
+
+  scale = (number, [inMin, inMax], [outMin, outMax]) => {
+    // if you need an integer value use Math.floor or Math.ceil here
+    return ((number - inMin) / (inMax - inMin)) * (outMax - outMin) + outMin
   }
 
   settings() {
@@ -174,11 +199,12 @@ export default class Sketch {
       })
       this.scene.add(this.resources.items.lady)
 
+      this.resources.items.lady.position.z = 399
       this.resources.items.lady.scale.setScalar(0)
       gsap.to(this.resources.items.lady.scale, {
-        x: 1,
-        y: 1,
-        z: 1,
+        x: 0.002,
+        y: 0.002,
+        z: 0.002,
         duration: 2,
         delay: 2.5
       })
@@ -199,15 +225,46 @@ export default class Sketch {
         onUpdate: self => {
           const time = duration * self.progress * 2
           this.mixer.setTime(time)
-
-          // const newPositionY = THREE.MathUtils.lerp(350, -100, self.progress);
-          // fbxRef.current.position.y = newPositionY;
-          // camera.lookAt(fbxRef.current.position);
         }
       })
 
       this.mixer.setTime(0)
       action.play()
+
+      this.addMountains()
+    })
+  }
+
+  addMountains() {
+    const geometry = new THREE.PlaneGeometry(20, 10, 256, 256)
+    this.materialmountains = new THREE.MeshStandardMaterial({
+      color: 0xfffafa,
+      wireframe: false,
+      map: this.resources.items.mountaintexture,
+      displacementMap: this.resources.items.mountainheight,
+      displacementScale: 2,
+      transparent: true,
+      opacity: 0
+    })
+
+    this.mountains = new THREE.Mesh(geometry, this.materialmountains)
+    this.mountains.position.z = 398
+    this.mountains.position.y = -0.8
+    this.mountains.rotation.x = -Math.PI / 3
+    this.scene.add(this.mountains)
+
+    ScrollTrigger.create({
+      trigger: '.mountain',
+      start: 'top 60%',
+      end: `bottom 40%`,
+      scrub: true,
+      markers: true,
+      onUpdate: self => {
+        this.mountains.material.opacity = self.progress
+
+        this.renderer.setClearColor(0x3e75c7, self.progress)
+        // gsap.to(scene.background,{ r:1, g:1, b:1, duration: 2 })
+      }
     })
   }
 
@@ -230,6 +287,15 @@ export default class Sketch {
       this.materials.forEach(m => {
         m.uniforms.time.value = this.time
       })
+    }
+
+    if (this.materialmountains) {
+      this.mountains.rotation.z = this.time * 0.03
+      this.materialmountains.displacementScale = this.scale(
+        this.mouse.x,
+        [0, window.innerWidth],
+        [1, 1.5]
+      )
     }
 
     this.material.uniforms.time.value = this.time
