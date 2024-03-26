@@ -258,7 +258,7 @@ export default class Sketch {
       start: 'top 60%',
       end: `bottom 40%`,
       scrub: true,
-      markers: true,
+      markers: false,
       onUpdate: self => {
         this.mountains.material.opacity = self.progress
 
