@@ -10,16 +10,6 @@ export default function GalleryWrapper() {
 
   // const sketchRef = useRef()
   const sketchRef = useRef<Sketch | undefined>(undefined);
-  const { menu } = useThemeContext();
-  const [width, setWidth] = useState('w-full')
-
-  useEffect(() => {
-    if (menu) {
-      setWidth('w-4/6')
-    } else {
-      setWidth('w-full')
-    }
-  }, [menu])
 
   const images = [
     {
@@ -77,8 +67,6 @@ export default function GalleryWrapper() {
     let scale = 3.5
     let radius = 10.
 
-    
-
     let objs = Array(images.length).fill({dist: 0})
 
     objs.forEach((o, i) => {
@@ -94,6 +82,7 @@ export default function GalleryWrapper() {
       gsap.to(sketch.meshes[i].position, {
         x: radius * Math.cos(angle + Math.PI / 2),
         y: radius * Math.sin(angle + Math.PI / 2),
+        z: o.dist * 1.,
         duration: 1,
         delay: 1
       })
@@ -211,7 +200,7 @@ export default function GalleryWrapper() {
           )
         })}
       </div>
-      <div id="container" className={`${width} h-screen fixed top-0 left-0 z-10 pointer-events-none `} />
+      <div id="container" className={`w-screen h-screen fixed top-0 left-0 z-10 pointer-events-none `} />
     </section>
   )
 }

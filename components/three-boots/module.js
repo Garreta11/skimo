@@ -35,7 +35,8 @@ export default class Sketch {
     this.raycaster = new THREE.Raycaster()
     this.mouse = new THREE.Vector2()
 
-    this.camera.position.set(0, 0, 70)
+    this.camera.position.set(0, 0, 0)
+    // this.camera.lookAt(0, -10, 0)
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
     this.controls.enableZoom = true
     this.controls.minDistance = 40
@@ -64,7 +65,6 @@ export default class Sketch {
 
     this.resources = new Resources(this.sources)
     this.resources.on('ready', () => {
-      console.log(this.resources)
       this.envMap()
       this.addLights()
       this.addObjects()
@@ -137,6 +137,7 @@ export default class Sketch {
       fragmentShader: fragment
     })
 
+    this.model = this.resources.items.boots
     this.resources.items.boots.traverse(child => {
       if (child.isMesh) {
         child.material = new THREE.MeshStandardMaterial({
@@ -187,6 +188,10 @@ export default class Sketch {
       this.materials.forEach(m => {
         m.uniforms.time.value = this.time
       })
+    }
+
+    if (this.resources.items) {
+      this.camera.lookAt(this.resources.items.boots.position)
     }
 
     this.material.uniforms.time.value = this.time

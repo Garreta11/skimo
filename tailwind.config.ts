@@ -19,6 +19,21 @@ const config: Config = {
       fontFamily: {
         "panchang": ['var(--font-panchang)']
       },
+      keyframes: {
+        show: {
+          '0%': {
+            transform: 'translateY(100vh)',
+            opacity: "0"
+          },
+          '100%': {
+            transform: 'translateY(0%)',
+            opacity: "1"
+          },
+        },
+      },
+      animation: {
+        'show-up': 'show 1s ease forwards 2.5s',
+      },
     }
   },
   plugins: [],

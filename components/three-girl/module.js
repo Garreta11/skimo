@@ -1,9 +1,5 @@
 import * as THREE from 'three'
-import fragment from './shader/fragment.glsl'
-import vertex from './shader/vertex.glsl'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 import Resources from './resources'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -150,26 +146,6 @@ export default class Sketch {
   }
 
   addObjects() {
-    let that = this
-    this.material = new THREE.ShaderMaterial({
-      extensions: {
-        derivatives: '#extension GL_OES_standard_derivatives : enable'
-      },
-      side: THREE.DoubleSide,
-      uniforms: {
-        time: { type: 'f', value: 0 },
-        texture1: { type: 't', value: null },
-        resolution: { type: 'v4', value: new THREE.Vector4() },
-        uvRate1: {
-          value: new THREE.Vector2(1, 1)
-        }
-      },
-      // wireframe: true,
-      transparent: true,
-      vertexShader: vertex,
-      fragmentShader: fragment
-    })
-
     this.model = this.resources.items.lady
     this.resources.items.lady.rotation.x = 0.15 * Math.PI
     this.resources.items.lady.traverse(child => {
@@ -296,7 +272,6 @@ export default class Sketch {
       )
     }
 
-    this.material.uniforms.time.value = this.time
     requestAnimationFrame(this.render.bind(this))
     this.renderer.render(this.scene, this.camera)
   }
