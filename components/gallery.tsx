@@ -72,6 +72,10 @@ export default function GalleryWrapper() {
     let attractTo = 0
     let speed = 0
     let position = 0
+    let rounded = 0
+
+    let scale = 3.5
+    let radius = 10.
 
     
 
@@ -81,19 +85,8 @@ export default function GalleryWrapper() {
       o.dist = Math.min(Math.abs(position - i), 1)
       o.dist = 1 - o.dist**2
 
-      // let scale = 3 + 5 * o.dist
-      let scale = 3.5
-      let radius = 10.
-
       sketch.meshes[i].position.set(0, 0, 0)
       sketch.meshes[i].rotation.set(0, 0, 0)
-
-      // Horizontal Slider
-      /* gsap.to(sketch.meshes[i].position, {
-        y: (i * 4) - (position * 4),
-        duration: 1,
-        delay: 1  
-      }) */
 
       // Circle Slider
       let pos = (position % objs.length)
@@ -118,34 +111,25 @@ export default function GalleryWrapper() {
       // Clamp position so we don't have infinite scroll
       // position = Math.min(Math.max(position, 0), objs.length)
 
-      let pos = (position % objs.length)
+      position = (position % objs.length)
+      rounded = Math.round(position)
+
+      position += -(position - attractTo) * 0.1
 
       objs.forEach((o, i) => {
-        o.dist = Math.min(Math.abs(pos - i), 1)
+        o.dist = Math.min(Math.abs(position - i), 1)
         o.dist = 1 - o.dist**2
 
-        // let scale = 1 + 0.9 * o.dist
-        //let scale = 3 + 8 * o.dist
-        let scale = 3.5
-        let radius = 10.
-
-        // Circle Shape
-        let angle = ((i - pos) / objs.length) * Math.PI * 2;
+        // Circle Slider
+        let angle = ((i - position) / objs.length) * Math.PI * 2;
         sketch.meshes[i].position.x = radius * Math.cos(angle + Math.PI / 2)
         sketch.meshes[i].position.y = radius * Math.sin(angle + Math.PI / 2)
-        // sketch.meshes[i].position.z = o.dist * 10.;
-
-        // Vertical Slider
-        /* sketch.meshes[i].position.y = (i * 4) - (position * 4)
-        sketch.meshes[i].position.z = o.dist * 1.; */
-    
+        sketch.meshes[i].position.z = o.dist * 1.;
 
         sketch.meshes[i].scale.set(scale, scale, scale)
         sketch.meshes[i].material.uniforms.distanceFromCenter.value = o.dist;
         
       })
-
-      position += -(position - attractTo) * 0.1
 
       window.requestAnimationFrame(raf)
     }

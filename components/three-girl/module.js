@@ -69,15 +69,26 @@ export default class Sketch {
         name: 'mountainheight',
         type: 'texture',
         file: './images/mountain/height.png'
+      },
+      {
+        name: 'envmap',
+        type: 'envmap',
+        file: './envMap/snow_low.hdr'
       }
     ]
 
-    this.envMap()
-    this.addLights()
-    this.addObjects()
-    this.resize()
-    this.render()
-    this.setupResize()
+    this.resources = new Resources(this.sources)
+
+    this.resources.on('ready', () => {
+      console.log('READY')
+      this.envMap()
+      this.addLights()
+      this.addObjects()
+      this.resize()
+      this.render()
+      this.setupResize()
+    })
+
     // this.settings();
 
     window.addEventListener('mousemove', e => {
@@ -113,27 +124,18 @@ export default class Sketch {
   }
 
   envMap() {
-    /* const cubeTexture = new THREE.CubeTextureLoader()
-    // LDR Cube Texture
-    this.environmentMap = cubeTexture.load([
-      '/envMap/px.png',
-      '/envMap/nx.png',
-      '/envMap/py.png',
-      '/envMap/ny.png',
-      '/envMap/pz.png',
-      '/envMap/nz.png'
-    ])
-    this.scene.background = this.environmentMap
-    this.scene.environment = this.environmentMap */
-
+    /* console.log(this.resources.items.envmap)
     const rgbeloader = new RGBELoader()
 
-    rgbeloader.load('/envMap/snow.hdr', environmentMap => {
+    rgbeloader.load('/envMap/snow_low.hdr', environmentMap => {
       environmentMap.mapping = THREE.EquirectangularReflectionMapping
       // this.scene.background = environmentMap
       // this.scene.backgroundIntensity = 0.1
       this.scene.environment = environmentMap
-    })
+    }) */
+
+    this.resources.items.envmap.mapping = THREE.EquirectangularReflectionMapping
+    this.scene.environment = this.resources.items.envmap
   }
 
   addLights() {
@@ -168,71 +170,67 @@ export default class Sketch {
       fragmentShader: fragment
     })
 
-    this.resources = new Resources(this.sources)
-
-    this.resources.on('ready', () => {
-      this.model = this.resources.items.lady
-      this.resources.items.lady.rotation.x = 0.15 * Math.PI
-      this.resources.items.lady.traverse(child => {
-        if (child.isMesh) {
-          this.meshes.push(child)
+    this.model = this.resources.items.lady
+    this.resources.items.lady.rotation.x = 0.15 * Math.PI
+    this.resources.items.lady.traverse(child => {
+      if (child.isMesh) {
+        this.meshes.push(child)
+      }
+      if (child.isMesh) {
+        if (child.name === 'ground') {
+          // Apply a new material to the child object
+          const newMaterial = new THREE.MeshBasicMaterial({
+            color: 0xff0000,
+            transparent: true,
+            opacity: 0.0
+          }) // Example material
+          child.material = newMaterial
+        } else {
+          // Apply a new material to the child object
+          const newMaterial = new THREE.MeshStandardMaterial({
+            roughness: 0.3,
+            metalness: 1,
+            color: 0xaaaaaa
+          }) // Example material
+          child.material = newMaterial
         }
-        if (child.isMesh) {
-          if (child.name === 'ground') {
-            // Apply a new material to the child object
-            const newMaterial = new THREE.MeshBasicMaterial({
-              color: 0xff0000,
-              transparent: true,
-              opacity: 0.0
-            }) // Example material
-            child.material = newMaterial
-          } else {
-            // Apply a new material to the child object
-            const newMaterial = new THREE.MeshStandardMaterial({
-              roughness: 0.3,
-              metalness: 1,
-              color: 0xaaaaaa
-            }) // Example material
-            child.material = newMaterial
-          }
-        }
-      })
-      this.scene.add(this.resources.items.lady)
-
-      this.resources.items.lady.position.z = 399
-      this.resources.items.lady.scale.setScalar(0)
-      gsap.to(this.resources.items.lady.scale, {
-        x: 0.002,
-        y: 0.002,
-        z: 0.002,
-        duration: 2,
-        delay: 2.5
-      })
-
-      this.mixer = new THREE.AnimationMixer(this.resources.items.lady)
-      const action = this.mixer.clipAction(
-        this.resources.items.lady.animations[0]
-      )
-
-      const duration = this.resources.items.lady.animations[0].duration
-
-      ScrollTrigger.create({
-        trigger: '.page',
-        start: 'top bottom',
-        end: `bottom top`,
-        scrub: true,
-        markers: false,
-        onUpdate: self => {
-          const time = duration * self.progress * 2
-          this.mixer.setTime(time)
-        }
-      })
-
-      this.mixer.setTime(0)
-      action.play()
-
-      this.addMountains()
+      }
     })
+    this.scene.add(this.resources.items.lady)
+
+    this.resources.items.lady.position.z = 399
+    this.resources.items.lady.scale.setScalar(0)
+    gsap.to(this.resources.items.lady.scale, {
+      x: 0.002,
+      y: 0.002,
+      z: 0.002,
+      duration: 2,
+      delay: 2.5
+    })
+
+    this.mixer = new THREE.AnimationMixer(this.resources.items.lady)
+    const action = this.mixer.clipAction(
+      this.resources.items.lady.animations[0]
+    )
+
+    const duration = this.resources.items.lady.animations[0].duration
+
+    ScrollTrigger.create({
+      trigger: '.page',
+      start: 'top bottom',
+      end: `bottom top`,
+      scrub: true,
+      markers: false,
+      onUpdate: self => {
+        const time = duration * self.progress * 2
+        this.mixer.setTime(time)
+      }
+    })
+
+    this.mixer.setTime(0)
+    action.play()
+
+    this.addMountains()
   }
 
   addMountains() {

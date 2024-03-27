@@ -58,7 +58,7 @@ export default class Sketch {
       {
         name: 'envmap',
         type: 'envmap',
-        path: './envMap/snow.hdr'
+        path: './envMap/snow_low.hdr'
       }
     ]
 
@@ -98,28 +98,6 @@ export default class Sketch {
   }
 
   envMap() {
-    /* const cubeTexture = new THREE.CubeTextureLoader()
-    // LDR Cube Texture
-    this.environmentMap = cubeTexture.load([
-      '/envMap/px.png',
-      '/envMap/nx.png',
-      '/envMap/py.png',
-      '/envMap/ny.png',
-      '/envMap/pz.png',
-      '/envMap/nz.png'
-    ])
-    this.scene.background = this.environmentMap
-    this.scene.environment = this.environmentMap */
-
-    /* const rgbeloader = new RGBELoader()
-
-    rgbeloader.load('/envMap/snow.hdr', environmentMap => {
-      environmentMap.mapping = THREE.EquirectangularReflectionMapping
-      this.scene.background = environmentMap
-      this.scene.backgroundIntensity = 0.1
-      this.scene.environment = environmentMap
-    }) */
-
     this.resources.items.envmap.mapping = THREE.EquirectangularReflectionMapping
     this.scene.background = this.resources.items.envmap
     this.scene.backgroundIntensity = 0.1
