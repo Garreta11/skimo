@@ -16,19 +16,9 @@ import Title from "./title"
 export default function HomeWrapper() {
 
   const sketchRef = useRef<Sketch | undefined>(undefined);
-  const { menu } = useThemeContext();
-  const [width, setWidth] = useState('w-full')
 
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [scrollDirection, setScrollDirection] = useState('');
-
-  useEffect(() => {
-    if (menu) {
-      setWidth('w-4/6')
-    } else {
-      setWidth('w-full')
-    }
-  }, [menu])
 
   useEffect(() => {
 
@@ -134,7 +124,7 @@ export default function HomeWrapper() {
               <div
                 className="parallax absolute bg-center bg-no-repeat bg-cover -inset-y-32 -inset-x-32"
                 style={{
-                  backgroundImage: `url(/images/home/material.JPG)`,
+                  backgroundImage: `url(/images/home/material.png)`,
                 }}
               />
             </div>
@@ -153,7 +143,7 @@ export default function HomeWrapper() {
               <div
                 className="parallax absolute bg-center bg-no-repeat bg-cover -inset-y-32 -inset-x-32"
                 style={{
-                  backgroundImage: `url(/images/home/ascend.JPG)`,
+                  backgroundImage: `url(/images/home/ascend.jpeg)`,
                 }}
               />
             </div>
@@ -172,7 +162,7 @@ export default function HomeWrapper() {
               <div
                 className="parallax absolute bg-center bg-no-repeat bg-cover -inset-y-32 -inset-x-32"
                 style={{
-                  backgroundImage: `url(/images/home/top.JPG)`,
+                  backgroundImage: `url(/images/home/top.jpeg)`,
                 }}
               />
             </div>

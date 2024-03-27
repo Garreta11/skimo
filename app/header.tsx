@@ -7,12 +7,11 @@ import { useThemeContext } from '@/components/theme'
 export default function Header() {
 
   const { menu, setMenu } = useThemeContext();
-
   const [width, setWidth] = useState('w-0')
 
   useEffect(() => {
     if (menu) {
-      setWidth('w-2/6')
+      setWidth('w-full')
     } else {
       setWidth('w-0')
     }
@@ -23,7 +22,7 @@ export default function Header() {
   }
 
   return (
-    <header className={`z-30 fixed right-0 flex justify-center items-center h-screen bg-black text-white font-bold ${width} transition-all duration-500 overflow-auto`}>
+    <header className={`z-30 fixed right-0 flex justify-center items-center h-screen bg-transparent backdrop-blur-2xl text-white mix-blend-difference font-bold ${width} transition-all duration-500 overflow-auto`}>
       <nav className='py-8'>
         <ul className='font-panchang container flex flex-col gap-5 items-center	justify-center text-center text-2xl'>
           <li>
@@ -35,9 +34,9 @@ export default function Header() {
           <li>
             <Link href='/gallery' onClick={handleClick}>Gallery</Link>
           </li>
-          <li>
+          {/* <li>
             <Link href='/contact' onClick={handleClick}>Contact</Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>

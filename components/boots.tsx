@@ -11,21 +11,9 @@ export default function BootsWrapper() {
 
   const meshesRef = useRef<any[]>([]);
 
-  const { menu } = useThemeContext();
-  const [width, setWidth] = useState('w-full')
-
   const [settings, setSettings] = useState(false)
   const [selectedItem, setSelectedItem] = useState('')
   const [textureSize, setTextureSize] = useState(false)
-
-
-  useEffect(() => {
-    if (menu) {
-      setWidth('w-4/6')
-    } else {
-      setWidth('w-full')
-    }
-  }, [menu])
 
   useEffect(() => {
     let sketch = new Sketch({
@@ -268,7 +256,7 @@ export default function BootsWrapper() {
         )}
       </div>
 
-      <div id="container" className={`${width} h-screen fixed top-0 left-0 z-10 pointer-events-all `} />
+      <div id="container" className={`w-full h-screen fixed top-0 left-0 z-10 pointer-events-all `} />
     </section>
   )
 }
