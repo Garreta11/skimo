@@ -378,6 +378,6 @@ export default function BootsWrapper() {
 const SlideImg = ({img}:{img:String}) => {
 
   return (
-    <img className="item w-20 h-20 cursor-pointer opacity-0 relative -left-4" src={`./images/boot/`+img+`.png`} alt={img} />
+    <img className="item w-20 h-20 cursor-pointer opacity-0 relative -left-4" src={`./images/boot/`+img+`.png`} alt={`${img}`} />
   )
 }
