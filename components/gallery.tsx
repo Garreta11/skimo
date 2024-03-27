@@ -94,6 +94,7 @@ export default function GalleryWrapper() {
     })
 
     function raf() {
+      let navs = Array.from(document.querySelectorAll(".item")) as HTMLElement[];
       position += speed
       speed *= 0.9
 
@@ -103,7 +104,25 @@ export default function GalleryWrapper() {
       position = (position % objs.length)
       rounded = Math.round(position)
 
-      position += -(position - attractTo) * 0.1
+      let diff = (rounded - position)
+      
+      if (attractMode) {
+        position += -(position - attractTo) * 0.01
+      } else {
+        position += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.015
+      }
+
+      /* if (position > 0) {
+        navs.forEach((n, i) => {
+          if ( i == Math.floor(position)) {
+            navs[i].classList.add('text-white')
+            navs[i].classList.remove('text-gray-800')
+          } else {
+            navs[i].classList.remove('text-white')
+            navs[i].classList.add('text-gray-800')
+          }
+        })
+      } */
 
       objs.forEach((o, i) => {
         o.dist = Math.min(Math.abs(position - i), 1)
