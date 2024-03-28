@@ -89,7 +89,8 @@ export default class Sketch {
       this.scene.add(group)
       this.meshes.push(mesh)
 
-      group.position.y = -10
+      //group.position.y = -10
+      group.position.z = -10
     })
   }
 

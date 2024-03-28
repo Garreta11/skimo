@@ -132,35 +132,35 @@ export default function BootsWrapper() {
         gsap.to(sketchRef.current.camera.position, {
           x: 100.,
           y: 0.,
-          z: -35
+          z: -60
         })
         break
       case 'cloth':
         gsap.to(sketchRef.current.camera.position, {
           x: 50.,
           y: 40.,
-          z: 70
+          z: 60
         })
         break
       case 'lace':
         gsap.to(sketchRef.current.camera.position, {
           x: 30.,
           y: 40.,
-          z: 30
+          z: 60
         })
         break
       case 'metal':
         gsap.to(sketchRef.current.camera.position, {
           x: 50.,
           y: 0.,
-          z: -50
+          z: -60
         })
         break
       case 'plastic_1':
         gsap.to(sketchRef.current.camera.position, {
           x: -50.,
           y: 0.,
-          z: -50
+          z: -60
         })
         break
       case 'plastic_2':
@@ -175,7 +175,7 @@ export default function BootsWrapper() {
         gsap.to(sketchRef.current.camera.position, {
           x: 0.,
           y: 0.,
-          z: 0
+          z: 60
         })
         break
     }
@@ -330,10 +330,10 @@ export default function BootsWrapper() {
         {parts.map((p, i) => {
           return(
             <SwiperSlide key={p.name} className={`relative font-panchang font-bold`}>
-              <div className={`px-8 pb-16 lg:px-28 lg:pb-28 transition-all ${settings ? 'pt-28' : 'pt-12'}`}>
+              <div className={`px-8 pb-16 lg:px-16 lg:pb-16 transition-all ${settings ? 'pt-16' : 'pt-16'}`}>
                 <div className={`flex gap-5 lg:gap-10 justify-center items-center transition-all ${settings ? 'mb-4' : 'mb-0'} `}>
                   <h2 className="text-2xl relative capitalize text-center">{p.name.replace('_', ' ')}</h2>
-                  <img className={`w-10 h-10 cursor-pointer transition-all w-5 h-5 ${settings ? 'rotate-90' : '-rotate-90'}`} src="./arrow-white.svg" onClick={handleSettings} />
+                  <img className={`lg:w-5 lg:h-5 cursor-pointer transition-all w-3 h-3 ${settings ? 'rotate-90' : '-rotate-90'}`} src="./arrow-white.svg" onClick={handleSettings} />
                 </div>
                 
                 <div className={`flex justify-center lg:justify-between items-center w-full overflow-hidden transition-all ${settings ? 'max-h-44' : 'max-h-0'} px-5 lg:px-28`}>

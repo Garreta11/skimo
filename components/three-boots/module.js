@@ -191,6 +191,7 @@ export default class Sketch {
     }
 
     if (this.resources.items) {
+      this.resources.items.boots.rotation.z = this.time * 0.1
       this.camera.lookAt(this.resources.items.boots.position)
     }
 

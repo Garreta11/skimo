@@ -83,11 +83,16 @@ export default function GalleryWrapper() {
         x: radius * Math.cos(angle + Math.PI / 2),
         y: radius * Math.sin(angle + Math.PI / 2),
         z: o.dist * 1.,
-        duration: 1,
+        duration: 0.8,
         delay: 1
       })
+      gsap.to(sketch.groups[i].position, {
+        y: -10,
+        z: -2,
+        duration: 0.8,
+        delay: 2
+      })
 
-     
       sketch.meshes[i].scale.set(scale, scale, scale)
       sketch.meshes[i].material.uniforms.distanceFromCenter.value = o.dist;
 

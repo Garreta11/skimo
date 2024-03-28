@@ -223,7 +223,7 @@ export default class Sketch {
 
     this.mountains = new THREE.Mesh(geometry, this.materialmountains)
     this.mountains.position.z = 398
-    this.mountains.position.y = -0.8
+    this.mountains.position.y = -2
     this.mountains.rotation.x = -Math.PI / 3
     this.scene.add(this.mountains)
 
@@ -264,11 +264,11 @@ export default class Sketch {
     }
 
     if (this.materialmountains) {
-      this.mountains.rotation.z = this.time * 0.03
+      this.mountains.rotation.z = this.time * 0.01
       this.materialmountains.displacementScale = this.scale(
-        this.mouse.x,
-        [0, window.innerWidth],
-        [1, 1.5]
+        this.mouse.y,
+        [0, window.innerHeight],
+        [1.5, 2]
       )
     }
 
