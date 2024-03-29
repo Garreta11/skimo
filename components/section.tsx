@@ -76,30 +76,30 @@ export default function Section({ title, text, side = 'left', mediapath, video=f
   }, [])
   
   return (
-    <section ref={container} className={`w-full min-h-screen flex items-center font-panchang flex-col mb-8 lg:mb-0 ${side == 'left' ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+    <section className={`w-full min-h-screen flex items-center font-panchang flex-col mb-8 lg:mb-0 ${side == 'left' ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
       {/* {children} */}
-      <div className="w-full lg:w-1/2 p-8 py-14 lg:py-8">
-            <h2 ref={titleRef} className="text-3xl lg:text-5xl font-bold">{title}</h2>
-            <p ref={textRef} className="text-reveal text-1xl">{text}</p>
+      <div ref={container} className="w-full lg:min-h-screen flex flex-col justify-center lg:w-1/2 p-8 py-14 lg:py-8">
+        <h2 ref={titleRef} className="text-3xl lg:text-5xl font-bold">{title}</h2>
+        <p ref={textRef} className="text-reveal text-1xl">{text}</p>
+      </div>
+      <div className="w-full lg:w-1/2">
+        {video && (
+          <video className="w-full h-auto" width="1920" height="1080" controls={false} muted autoPlay loop>
+            <source src={mediapath} type="video/mp4" />
+            Your browser does not support the video tag.
+            </video>
+        )}
+        {!video && (
+          <div className="w-full padding-parallax before:padding-parallax-before">
+            <div
+              className="parallax absolute bg-center bg-no-repeat bg-cover -inset-y-32 -inset-x-32"
+              style={{
+                backgroundImage: `url(${mediapath})`,
+              }}
+            />
           </div>
-          <div className="w-full lg:w-1/2">
-            {video && (
-              <video className="w-full h-auto" width="1920" height="1080" controls={false} muted autoPlay loop>
-                <source src={mediapath} type="video/mp4" />
-                Your browser does not support the video tag.
-                </video>
-            )}
-            {!video && (
-              <div className="w-full padding-parallax before:padding-parallax-before">
-                <div
-                  className="parallax absolute bg-center bg-no-repeat bg-cover -inset-y-32 -inset-x-32"
-                  style={{
-                    backgroundImage: `url(${mediapath})`,
-                  }}
-                />
-              </div>
-            )}
-          </div>
+        )}
+      </div>
     </section>
   )
 }
