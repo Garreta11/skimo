@@ -67,7 +67,7 @@ export default function GalleryWrapper() {
     let rounded = 0
 
     let initScale = 1
-    let scale = 2
+    let scale = 4
     let initRadius = 5.
     let radius = 10.
 
@@ -103,9 +103,9 @@ export default function GalleryWrapper() {
         delay: 2.6
       })
       gsap.to(sketch.meshes[i].scale, {
-        x: scale,
-        y: scale,
-        z: scale,
+        x: initScale + scale * o.dist,
+        y: initScale + scale * o.dist,
+        z: initScale + scale * o.dist,
         duration: 0.8,
         delay: 2.6
       })
@@ -158,9 +158,9 @@ export default function GalleryWrapper() {
         let angle = ((i - position) / objs.length) * Math.PI * 2;
         sketch.meshes[i].position.x = radius * Math.cos(angle + Math.PI / 2)
         sketch.meshes[i].position.y = radius * Math.sin(angle + Math.PI / 2)
-        sketch.meshes[i].position.z = o.dist * 1.;
+        // sketch.meshes[i].position.z = o.dist * 4.;
 
-        sketch.meshes[i].scale.set(scale, scale, scale)
+        sketch.meshes[i].scale.set(initScale + scale * o.dist, initScale + scale * o.dist, initScale + scale * o.dist)
         sketch.meshes[i].material.uniforms.distanceFromCenter.value = o.dist;
         
       })
