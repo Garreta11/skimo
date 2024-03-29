@@ -13,6 +13,10 @@
     font-size: 15rem;
   }
 
+  .text-l {
+    font-size: 8rem;
+  }
+
   .text-mid {
     font-size: 3rem;
   }
@@ -46,6 +50,17 @@
     border-radius: 50%;
     border: 2px solid black;
     /* border: none; */
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .hidescrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .hidescrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 }
 

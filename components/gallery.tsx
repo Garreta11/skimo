@@ -11,6 +11,8 @@ export default function GalleryWrapper() {
   // const sketchRef = useRef()
   const sketchRef = useRef<Sketch | undefined>(undefined);
 
+  const { isScreenSmall } = useThemeContext()
+
   const images = [
     {
       name: '1.jpg',
@@ -64,7 +66,9 @@ export default function GalleryWrapper() {
     let position = 0
     let rounded = 0
 
-    let scale = 3.5
+    let initScale = 1
+    let scale = 2
+    let initRadius = 5.
     let radius = 10.
 
     let objs = Array(images.length).fill({dist: 0})
@@ -75,38 +79,56 @@ export default function GalleryWrapper() {
 
       sketch.meshes[i].position.set(0, 0, 0)
       sketch.meshes[i].rotation.set(0, 0, 0)
+      sketch.meshes[i].scale.set(initScale, initScale, initScale)
 
       // Circle Slider
       let pos = (position % objs.length)
       let angle = ((i - pos) / objs.length) * Math.PI * 2;
       gsap.to(sketch.meshes[i].position, {
-        x: radius * Math.cos(angle + Math.PI / 2),
-        y: radius * Math.sin(angle + Math.PI / 2),
+        x: initRadius * Math.cos(angle + Math.PI / 2),
+        y: initRadius * Math.sin(angle + Math.PI / 2),
         z: o.dist * 1.,
         duration: 0.8,
         delay: 1
+      })
+      gsap.to(sketch.groups[i].rotation, {
+        z: 2 * Math.PI,
+        duration: 0.8,
+        delay: 1.8
       })
       gsap.to(sketch.groups[i].position, {
         y: -10,
         z: -2,
         duration: 0.8,
-        delay: 2
+        delay: 2.6
+      })
+      gsap.to(sketch.meshes[i].scale, {
+        x: scale,
+        y: scale,
+        z: scale,
+        duration: 0.8,
+        delay: 2.6
+      })
+      gsap.to(sketch.meshes[i].position, {
+        x: radius * Math.cos(angle + Math.PI / 2),
+        y: radius * Math.sin(angle + Math.PI / 2),
+        z: o.dist * 1.,
+        duration: 0.8,
+        delay: 2.6
       })
 
-      sketch.meshes[i].scale.set(scale, scale, scale)
       sketch.meshes[i].material.uniforms.distanceFromCenter.value = o.dist;
 
     })
 
     function raf() {
-      let navs = Array.from(document.querySelectorAll(".item")) as HTMLElement[];
       position += speed
       speed *= 0.9
 
       // Clamp position so we don't have infinite scroll
-      // position = Math.min(Math.max(position, 0), objs.length)
+      position = Math.min(Math.max(position, 0), objs.length - 1)
 
-      position = (position % objs.length)
+      // position = (position % objs.length)
       rounded = Math.round(position)
 
       let diff = (rounded - position)
@@ -117,17 +139,16 @@ export default function GalleryWrapper() {
         position += Math.sign(diff) * Math.pow(Math.abs(diff), 0.7) * 0.015
       }
 
-      /* if (position > 0) {
-        navs.forEach((n, i) => {
-          if ( i == Math.floor(position)) {
-            navs[i].classList.add('text-white')
-            navs[i].classList.remove('text-gray-800')
-          } else {
-            navs[i].classList.remove('text-white')
-            navs[i].classList.add('text-gray-800')
-          }
-        })
-      } */
+      let navs = Array.from(document.querySelectorAll(".item")) as HTMLElement[];
+      navs.forEach((n, i) => {
+        if (i === Math.round(position)) {
+          n.classList.add('text-white')
+          n.classList.remove('text-gray-800')
+        } else {
+          n.classList.remove('text-white')
+          n.classList.add('text-gray-800')
+        }
+      })
 
       objs.forEach((o, i) => {
         o.dist = Math.min(Math.abs(position - i), 1)
@@ -152,7 +173,7 @@ export default function GalleryWrapper() {
         speed += (e.deltaY * 0.0002)
       })
       raf()
-    }, 3000)
+    }, 3400)
 
     
     let navs = Array.from(document.querySelectorAll(".item")) as HTMLElement[];
@@ -183,23 +204,12 @@ export default function GalleryWrapper() {
       el.addEventListener('mouseover', (e) => {
         // attractTo = Number(e.target.getAttribute('data-nav'))
         attractTo = Number((e.target as HTMLElement).getAttribute('data-nav'));
-        navs.forEach(n => {
-          //if (n.getAttribute('data-nav') == attractTo) {
-          if (n.getAttribute('data-nav') === String(attractTo)) {
-            n.classList.add('text-white')
-            n.classList.remove('text-gray-800')
-          } else {
-            n.classList.add('text-gray-800')
-            n.classList.remove('text-white')
-          }
-        })
-
       })
 
       gsap.to(el, {
         x: 0,
         opacity: 1,
-        delay: 1+ i * 0.1
+        delay: 3.4 + i * 0.1
       })
 
     })
@@ -208,10 +218,10 @@ export default function GalleryWrapper() {
 
   return (
     <section className='relative'>
-      <div className="animate-list font-panchang font-bold nav fixed z-30 h-1/2 left-8 lg:top-1/2 top-16 transform lg:-translate-y-1/2 text-white mix-blend-difference">
+      <div className="hidescrollbar animate-list text-center w-10/12 lg:w-fit overflow-y-scroll font-panchang font-bold nav fixed z-30 h-1/2 left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2 text-white mix-blend-difference">
         {images.map((im, i) => {
           return(
-            <div key={i} className={`item opacity-0 -translate-x-10 text-1xl lg:text-2xl my-2 ${i === 0 ? 'text-white' : 'text-gray-800'} `} data-nav={i}>{im.label}</div>
+            <div key={i} className={`cursor-pointer item opacity-0 w-fit m-auto -translate-x-10 text-1xl lg:text-2xl my-2 ${i === 0 ? 'text-white' : 'text-gray-800'} hover:!text-white`} data-nav={i}>{im.label}</div>
           )
         })}
       </div>
