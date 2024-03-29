@@ -43,8 +43,8 @@ export default function Header() {
   return (
     <header className={`z-30 fixed right-0 flex justify-center items-center h-screen bg-black text-white font-bold ${width} transition-all duration-500 overflow-auto`}>
       <nav className='h-full w-full'>
-        <ul className='font-panchang w-full h-full flex flex-col lg:flex-row w-screen items-center justify-between text-center text-2xl'>
-          <li className='lg:w-1/3 w-full h-full flex items-center'>
+        <ul className='font-panchang w-full h-full flex flex-col lg:flex-row w-screen items-center justify-center lg:justify-between text-center text-2xl'>
+          <li className='lg:w-1/3 w-full h-1/6 lg:h-full flex items-center'>
             <Link className='relative w-full h-full flex items-center justify-center' href='/' onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               {/* <Image className='absolute w-full opacity-0 top-1/2 left-0 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300' src="/images/menu/home.jpg" width={420} height={595} alt='menu-home' /> */}
               <video className='absolute object-cover w-full h-full opacity-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300' width="320" height="240" muted autoPlay={false} loop preload="none">
@@ -54,7 +54,7 @@ export default function Header() {
               <p className='relative text-white mix-blend-difference'>Home</p>
             </Link>
           </li>
-          <li className='lg:w-1/3 w-full h-full flex items-center'>
+          <li className='lg:w-1/3 w-full h-1/6 lg:h-full flex items-center'>
             <Link className='relative w-full h-full flex items-center justify-center' href='/boots' onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               {/* <Image className='absolute w-full opacity-0 top-1/2 left-0 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300' src="/images/menu/boots.jpg" width={420} height={595} alt='menu-boots' /> */}
               <video className='absolute object-cover w-full h-full opacity-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300' width="320" height="240" muted autoPlay={false} loop preload="none">
@@ -64,7 +64,7 @@ export default function Header() {
               <p className='relative text-white mix-blend-difference'>Boots Configurator</p>
             </Link>
           </li>
-          <li className='lg:w-1/3 w-full h-full flex items-center'>
+          <li className='lg:w-1/3 w-full h-1/6 lg:h-full flex items-center'>
             <Link className='relative w-full h-full flex items-center justify-center' href='/gallery' onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               {/* <Image className='absolute w-full opacity-0 top-1/2 left-0 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300' src="/images/menu/gallery.jpg" width={420} height={595} alt='menu-gallery' /> */}
               <video className='absolute object-cover w-full h-full opacity-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300' width="320" height="240" muted autoPlay={false} loop preload="none">
