@@ -125,49 +125,56 @@ export default function BootsWrapper() {
         gsap.to(sketchRef.current.camera.position, {
           x: 0.,
           y: -40.,
-          z: 60
+          z: 60,
+          duration: 1
         })
         break
       case 'chrome':
         gsap.to(sketchRef.current.camera.position, {
           x: 100.,
           y: 0.,
-          z: -60
+          z: -60,
+          duration: 1
         })
         break
       case 'cloth':
         gsap.to(sketchRef.current.camera.position, {
           x: 50.,
           y: 40.,
-          z: 60
+          z: 60,
+          duration: 1
         })
         break
       case 'lace':
         gsap.to(sketchRef.current.camera.position, {
           x: 30.,
           y: 40.,
-          z: 60
+          z: 60,
+          duration: 1
         })
         break
       case 'metal':
         gsap.to(sketchRef.current.camera.position, {
           x: 50.,
           y: 0.,
-          z: -60
+          z: -60,
+          duration: 1
         })
         break
       case 'plastic_1':
         gsap.to(sketchRef.current.camera.position, {
           x: -50.,
           y: 0.,
-          z: -60
+          z: -60,
+          duration: 1
         })
         break
       case 'plastic_2':
         gsap.to(sketchRef.current.camera.position, {
           x: -50.,
           y: 0.,
-          z: 60
+          z: 60,
+          duration: 1
         })
         break
       default:
@@ -175,7 +182,8 @@ export default function BootsWrapper() {
         gsap.to(sketchRef.current.camera.position, {
           x: 0.,
           y: 0.,
-          z: 60
+          z: 60,
+          duration: 1
         })
         break
     }

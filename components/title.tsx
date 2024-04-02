@@ -21,7 +21,7 @@ export default function Title({ children }: { children: React.ReactNode }) {
         opacity: 1,
         stagger: 0.05,
         duration: 1,
-        delay: 1
+        delay: 2
       })
       gsap.to('.image-intro', {
         opacity: 1,
@@ -56,12 +56,6 @@ export default function Title({ children }: { children: React.ReactNode }) {
         const top = Math.floor(Math.random() * (800 - 400 + 1) + 400)
         tl.to(char, {top: tops[i]}, 0)
       })
-
-      // tl.to('.text-intro', {y: 1080}, 0)
-      // tl.to('.image-intro', {y: 1080}, 0)
-
-      
-      
     })
     
     return () => context.revert()
