@@ -14,20 +14,37 @@ export default class Resources extends EventEmitter {
 
     this.loaded = 0
 
+    /* this.loadingManager = new THREE.LoadingManager()
+
+    this.loadingManager.onProgress = function () {
+      console.log('IT IS LOADED !!')
+    } */
+    /* this.loadingManager.onLoad = function () {
+      console.log('IT IS LOADED !!')
+    } */
+
     this.setLoaders()
     this.startLoading()
   }
 
   setLoaders() {
     this.loaders = {}
-    this.loaders.gltfLoader = new GLTFLoader()
-    this.loaders.fbxLoader = new FBXLoader()
-    this.loaders.textureLoader = new THREE.TextureLoader()
-    this.loaders.cubeTextureLoader = new THREE.CubeTextureLoader()
-    this.loaders.rgbeLoader = new RGBELoader()
+    this.loaders.gltfLoader = new GLTFLoader(this.loadingManager)
+    this.loaders.fbxLoader = new FBXLoader(this.loadingManager)
+    this.loaders.textureLoader = new THREE.TextureLoader(this.loadingManager)
+    this.loaders.cubeTextureLoader = new THREE.CubeTextureLoader(
+      this.loadingManager
+    )
+    this.loaders.rgbeLoader = new RGBELoader(this.loadingManager)
   }
 
   startLoading() {
+    const progressbar = document.getElementById('progress-bar')
+    progressbar.value = 0
+    const progressBarContainer = document.getElementById(
+      'progress-bar-container'
+    )
+    progressBarContainer.style.display = 'flex'
     for (const source of this.sources) {
       if (source.type === 'gltfModel') {
         this.loaders.gltfLoader.load(source.path, model => {
@@ -56,7 +73,13 @@ export default class Resources extends EventEmitter {
   sourceLoaded(source, file) {
     this.items[source.name] = file
     this.loaded++
+    const progressbar = document.getElementById('progress-bar')
+    progressbar.value = 100 * (this.loaded / this.toLoad)
     if (this.loaded === this.toLoad) {
+      const progressBarContainer = document.getElementById(
+        'progress-bar-container'
+      )
+      progressBarContainer.style.display = 'none'
       this.trigger('ready')
     }
   }

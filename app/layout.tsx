@@ -71,6 +71,10 @@ export default function RootLayout({
 
             <Wrapper>
               <Logo />
+              <div id="progress-bar-container" className="fixed z-50 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen h-screen bg-black flex flex-col justify-center items-center">
+                <label className="font-panchang text-white text-5xl" for="progress-bar">Loading...</label>
+                <progress id="progress-bar" className="w-4/12 h-0.5 mt-8" value="0" max="100"></progress>
+              </div>
               <SmoothScroll>
                 <main>{children}</main>
               </SmoothScroll>

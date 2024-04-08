@@ -41,24 +41,6 @@ export default function HomeWrapper() {
     };
   }, [prevScrollPos]);
 
-  /* useEffect(() => {
-    if (sketchRef.current.model) {
-      if (scrollDirection === 'up') {
-        gsap.to(sketchRef.current.model.rotation, {
-          x: 0.15 * Math.PI,
-          y: Math.PI,
-          z: 0
-        })
-      } else {
-        gsap.to(sketchRef.current.model.rotation, {
-          x: 0.15 * Math.PI,
-          y: 0,
-          z: 0
-        })
-      }
-    }
-  }, [scrollDirection]) */
-
   return (
     <section className='relative'>
       

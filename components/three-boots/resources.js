@@ -28,6 +28,12 @@ export default class Resources extends EventEmitter {
   }
 
   startLoading() {
+    const progressbar = document.getElementById('progress-bar')
+    progressbar.value = 0
+    const progressBarContainer = document.getElementById(
+      'progress-bar-container'
+    )
+    progressBarContainer.style.display = 'flex'
     for (const source of this.sources) {
       if (source.type === 'gltfModel') {
         this.loaders.gltfLoader.load(source.path, model => {
@@ -56,7 +62,13 @@ export default class Resources extends EventEmitter {
   sourceLoaded(source, file) {
     this.items[source.name] = file
     this.loaded++
+    const progressbar = document.getElementById('progress-bar')
+    progressbar.value = 100 * (this.loaded / this.toLoad)
     if (this.loaded === this.toLoad) {
+      const progressBarContainer = document.getElementById(
+        'progress-bar-container'
+      )
+      progressBarContainer.style.display = 'none'
       this.trigger('ready')
     }
   }

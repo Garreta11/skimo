@@ -30,7 +30,6 @@ export default class Sketch {
       1000
     )
 
-    this.loader = new FBXLoader()
     this.raycaster = new THREE.Raycaster()
     this.mouse = new THREE.Vector2()
 
@@ -76,7 +75,6 @@ export default class Sketch {
     this.resources = new Resources(this.sources)
 
     this.resources.on('ready', () => {
-      console.log('READY')
       this.envMap()
       this.addLights()
       this.addObjects()
